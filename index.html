@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="image/favicon.ico" type="image/x-icon">
+    <title>PRAS4PATI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --pramuka-color: #1a5f1a;
+            --secondary-color: #d4af37;
+            --dark-color: #2c3e50;
+            --light-color: #f8f9fa;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--pramuka-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: var(--pramuka-color);
+            border-bottom: 2px solid var(--pramuka-color);
+        }
+
+        .menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--pramuka-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('image/backround-landingpage.jpg') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--pramuka-color);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+            background-color: #124012;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--pramuka-color);
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Dewan Ambalan Section */
+        .dewan-ambalan {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .member-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover .member-image img {
+            transform: scale(1.05);
+        }
+
+        .member-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .member-info h3 {
+            color: var(--pramuka-color);
+            margin-bottom: 5px;
+        }
+
+        .member-info p {
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .member-social a {
+            color: var(--dark-color);
+            transition: all 0.3s ease;
+        }
+
+        .member-social a:hover {
+            color: var(--pramuka-color);
+        }
+
+        /* Kegiatan Section */
+        .kegiatan {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .kegiatan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .kegiatan-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .kegiatan-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .kegiatan-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .kegiatan-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .kegiatan-item:hover .kegiatan-image img {
+            transform: scale(1.05);
+        }
+
+        .kegiatan-info {
+            padding: 20px;
+        }
+
+        .kegiatan-info h3 {
+            color: var(--pramuka-color);
+            margin-bottom: 10px;
+        }
+
+        .kegiatan-info .date {
+            display: flex;
+            align-items: center;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .kegiatan-info .date i {
+            margin-right: 5px;
+            color: var(--secondary-color);
+        }
+
+        .kegiatan-info p {
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--pramuka-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-column p {
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                background-color: white;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                transition: all 0.5s ease;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .btn {
+                display: block;
+                width: 80%;
+                margin: 10px auto;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="https://iili.io/FwuvQ3J.png" alt="Logo Gerakan Pramuka dengan tunas kelapa berwarna hijau di atas latar kuning">
+                    <span class="logo-text">PRAS4<span>PATI</span></span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#tentang">Tentang Kami</a></li>
+                    <li><a href="#dewan">Dewan Ambalan</a></li>
+                    <li><a href="#kegiatan">Kegiatan</a></li>
+                    <li><a href="#kontak">Kontak</a></li>
+                </ul>
+                <div class="menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1>Satyaku Kudarmakan, Dharmaku Kubaktikan</h1>
+                <p>Selamat datang di website resmi Pramuka SMK Negeri 4 Tebing Tinggi. Mari kita eksplorasi dunia kepramukaan bersama!</p>
+                <div>
+                    <a href="#kegiatan" class="btn">Lihat Kegiatan</a>
+                    <a href="#dewan" class="btn btn-outline">Kenal Kami</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="tentang">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tentang Ambalan Kami</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Menjadi Pramuka yang Berkarakter dan Berprestasi</h3>
+                    <p>Ambalan kami merupakan bagian dari Gerakan Pramuka yang berkomitmen untuk membentuk generasi muda yang berkarakter, mandiri, dan memiliki rasa tanggung jawab sosial yang tinggi.</p>
+                    <p>Dengan berbagai program pendidikan kepramukaan yang menyenangkan dan menantang, kami berusaha membangun karakter peserta didik melalui sistem among dan prinsip dasar kepramukaan.</p>
+                    <p>Kami percaya bahwa pendidikan kepramukaan adalah sarana efektif untuk membentuk pemimpin muda yang berintegritas dan berjiwa sosial.</p>
+                    <a href="#" class="btn">Read More</a>
+                </div>
+                <div class="about-image">
+                    <img src="image/anu.jpg" alt="Kelompok pramuka sedang berkemah di hutan dengan seragam lengkap, sedang berdiskusi di sekitar api unggun">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dewan Ambalan Section -->
+    <section class="dewan-ambalan" id="dewan">
+        <div class="container">
+            <div class="section-title">
+                <h2>Dewan Ambalan</h2>
+            </div>
+            <div class="section-title">
+                <p>Dewan Ambalan Deblod Sundoro - Hj. Sawiyah Masa Bakti 2025/2026</p>
+            </div>
+            <div class="team-grid">
+                <!-- Ketua -->
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="image/adly.jpg" alt="">
+                    </div>
+                    <div class="member-info">
+                        <h3>Adly Arhamtsah Siregar</h3>
+                        <p>Pradana Putra</p>
+                        <div class="member-social">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Wakil Ketua -->
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="image/cahaya.jpg" alt="">
+                    </div>
+                    <div class="member-info">
+                        <h3>Cahaya Kasih Novitta Simatupang</h3>
+                        <p>Pradana Putri</p>
+                        <div class="member-social">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bendahara -->
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="image/ucop2.jpg" alt="">
+                    </div>
+                    <div class="member-info">
+                        <h3>Yusuf Anwar</h3>
+                        <p>Kerani Putra</p>
+                        <div class="member-social">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sekretaris -->
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="image/aulia.jpg" alt="">
+                    </div>
+                    <div class="member-info">
+                        <h3>Aulia Az Zahra</h3>
+                        <p>Kerani Putri</p>
+                        <div class="member-social">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="" alt="">
+                    </div>
+                    <div class="member-info">
+                        <h3>Muhammad Dhika Andhira Sinaga</h3>
+                        <p>Pemangku Adat Putra</p>
+                        <div class="member-social">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="image/fani.jpg" alt="">
+                    </div>
+                    <div class="member-info">
+                        <h3>Efani Syahrani</h3>
+                        <p>Pemangku Adat Putri</p>
+                        <div class="member-social">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="" alt="">
+                    </div>
+                    <div class="member-info">
+                        <h3>Rasya Allbani</h3>
+                        <p>Juru Uang Putra</p>
+                        <div class="member-social">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="image/maya.jpg" alt="">
+                    </div>
+                    <div class="member-info">
+                        <h3>Maya Shifa Azahra</h3>
+                        <p>Juru Uang Putri</p>
+                        <div class="member-social">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kegiatan Section -->
+    <section class="kegiatan" id="kegiatan">
+        <div class="container">
+            <div class="section-title">
+                <h2>Kegiatan Kami</h2>
+            </div>
+            <div class="kegiatan-grid">
+                <!-- Kegiatan 1 -->
+                <div class="kegiatan-item">
+                    <div class="kegiatan-image">
+                        <img src="image/KOPI.jpg" alt="Pramuka sedang mempraktekkan tali temali dan membuat simpul di alam terbuka">
+                    </div>
+                    <div class="kegiatan-info">
+                        <h3>KOPI ONE PASS</h3>
+                        <div class="date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>2 – 4 Mei 2025</span>
+                        </div>
+                        <p>Alhamdulillah, kami telah selesai mengikuti kegiatan Kopi One Pass yang diselenggarakan pada tanggal 2–4 Mei 2025 di SMKN 1 Lubuk Pakam.
+                        Pada kegiatan ini, PRAS4PATI berhasil meraih JUARA 3 UMUM, dengan perolehan piala sebagai berikut:</p>
+                        <p>JUARA UTAMA 1 SCOUTING SKILL</p>
+                        <p>JUARA BINA 1 LKBB</p>   
+                        <p>JUARA BINA 2 PIONERING</p>
+                        <a target="_blank" class="btn" href="https://www.instagram.com/p/DJVOW7vBpnw/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==">Detail</a>
+                    </div>
+                </div>
+                
+                <!-- Kegiatan 2 -->
+                <div class="kegiatan-item">
+                    <div class="kegiatan-image">
+                        <img src="image/gbst.jpg" alt="Kelompok pramuka sedang melakukan jelajah alam dengan peta dan kompas di tangan">
+                    </div>
+                    <div class="kegiatan-info">
+                        <h3>GELAR BAKTI SANGGA TERPADU XI</h3>
+                        <div class="date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>24 – 26 Januari 2025</span>
+                        </div>
+                        <p>Alhamdulillah, kami telah selesai mengikuti kegiatan Gelar Bakti Sangga Terpadu XI Tahun 2025 yang akan diselenggarakan pada tanggal 24-26 Januari 2025 di Bumi Perkemahan Lapangan PT. MOEIS, Kab. Batubara. Pada kegiatan kali ini PRAS4PATI meraih:</p>
+                        <p>JUARA III UTAMA MEMASAK</p>
+                        <p>JUARA II MADYA PIONERING</p>
+                        <p>JUARA II MADYA LKBB</p>
+                        <p>JUARA II MADYA VIDEOGRAFI</p>
+                        <p>JUARA I PURWA TAPAK PERKEMAHAN</p>
+                        <a target="_blank" class="btn" href="https://www.instagram.com/p/DFb2nz6SKu_/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==">Detail</a>
+                    </div>
+                </div>
+                
+                <!-- Kegiatan 3 -->
+                <div class="kegiatan-item">
+                    <div class="kegiatan-image">
+                        <img src="image/kemta.jpg" alt="Pramuka sedang memasak bersama di perkemahan dengan peralatan sederhana">
+                    </div>
+                    <div class="kegiatan-info">
+                        <h3>KEMAH AKHIR TAHUN 2024</h3>
+                        <div class="date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>19 - 22 Desember 2024</span>
+                        </div>
+                        <p>Alhamdulillah, kami telah selesai mengikuti Kemah Akhir Tahun Kwartir Cabang Tebing Tinggi yang diselenggarakan pada tanggal 19-22 Desember 2024 di Pusdiklatcab Tebing Tinggi.</p>
+                        <a target="_blank" class="btn" href="https://www.instagram.com/p/DD6o347h5dq/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==">Detail</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="kontak">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tentang Kami</h3>
+                    <p>Ambalan kami adalah wadah pendidikan karakter berbasis kegiatan kepramukaan untuk membentuk generasi muda yang tangguh dan berakhlak mulia.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#tentang">Tentang Kami</a></li>
+                        <li><a href="#dewan">Dewan Ambalan</a></li>
+                        <li><a href="#kegiatan">Kegiatan</a></li>
+                        <li><a href="#kontak">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Jl. Abdul Hamid No. 103, Tebing Tinggi</p>
+                    <p><i class="fas fa-phone"></i> -</p>
+                    <p><i class="fas fa-envelope"></i> support@pras4pati.my.id</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 Gerakan Pramuka SMK Negeri 4 Tebing Tinggi. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                navLinks.classList.remove('active');
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animation on Scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                }
+            });
+        }
+
+        // Run animation on load and scroll
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+    </script>
+</body>
+</html>
+
